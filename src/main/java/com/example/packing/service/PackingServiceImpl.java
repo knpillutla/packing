@@ -20,6 +20,7 @@ import com.example.packing.dto.events.PackCreatedEvent;
 import com.example.packing.dto.requests.PackConfirmRequestDTO;
 import com.example.packing.dto.requests.PackCreationRequestDTO;
 import com.example.packing.dto.responses.PackDTO;
+import com.example.util.service.EventPublisher;
 
 @Service
 public class PackingServiceImpl implements PackingService {
