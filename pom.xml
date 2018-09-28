@@ -44,13 +44,13 @@
 	<dependencies>
 		<dependency>
 		    <groupId>com.example.wms</groupId>
-		    <artifactId>picking-interfaces</artifactId>
+		    <artifactId>picking-idd</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 		    <groupId>com.example.wms</groupId>
-		    <artifactId>packing-interfaces</artifactId>
-		    <version>${version}</version>
+		    <artifactId>packing-idd</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 		    <groupId>com.h2database</groupId>
