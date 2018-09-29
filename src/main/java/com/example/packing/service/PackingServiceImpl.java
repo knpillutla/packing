@@ -81,8 +81,8 @@ public class PackingServiceImpl implements PackingService {
 		newPackEntity.setUpdatedDttm(createdDttm);
 		newPackEntity.setStatCode(PackStatus.RELEASED.getStatCode());
 		PackDTO packDTO = EntityDTOConverter.getPackDTO(packDAO.save(newPackEntity));
-		PackCreatedEvent pickCreatedEvent = new PackCreatedEvent(packDTO);
-		eventPublisher.publish(pickCreatedEvent);
+		PackCreatedEvent packCreatedEvent = new PackCreatedEvent(packDTO);
+		eventPublisher.publish(packCreatedEvent);
 		logger.info("createPack End, created new pack:" + packDTO);
 		return packDTO;
 	}
