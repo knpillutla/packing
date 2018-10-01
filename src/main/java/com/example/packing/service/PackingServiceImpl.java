@@ -59,7 +59,6 @@ public class PackingServiceImpl implements PackingService {
 			packEntity.setPackedQty((packEntity.getPackedQty()==null?0:packEntity.getPackedQty()) + packConfirmRequest.getQtyPacked());
 			packEntity.setUserId(packConfirmRequest.getUserId());
 			packEntity.setStatCode(PackStatus.PACKED.getStatCode());
-			packEntity.setUpdatedDttm(new java.util.Date());
 			Pack updatedPackObj = packDAO.save(packEntity);
 			packDTO = EntityDTOConverter.getPackDTO(updatedPackObj);
 			PackConfirmationEvent packConfirmEvent = new PackConfirmationEvent(packDTO);
@@ -76,9 +75,6 @@ public class PackingServiceImpl implements PackingService {
 	@Transactional
 	public PackDTO createPack(PackCreationRequestDTO packCreationReq) throws Exception {
 		Pack newPackEntity = EntityDTOConverter.getPackEntity(packCreationReq);
-		Date createdDttm = new java.util.Date();
-		newPackEntity.setCreatedDttm(createdDttm);
-		newPackEntity.setUpdatedDttm(createdDttm);
 		newPackEntity.setStatCode(PackStatus.RELEASED.getStatCode());
 		PackDTO packDTO = EntityDTOConverter.getPackDTO(packDAO.save(newPackEntity));
 		PackCreatedEvent packCreatedEvent = new PackCreatedEvent(packDTO);
