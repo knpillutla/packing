@@ -26,16 +26,23 @@ import io.swagger.annotations.Api;
 @RefreshScope
 public class PackingRestEndPoint {
 
-    @Value("${message: Packing Service - Config Server is not working..pelase check}")
-    private String msg;
-    
     @Autowired
 	PackingService packingService;
-	Logger logger = LoggerFactory.getLogger(PackingRestEndPoint.class);
 	
-	@GetMapping("/")
-	public ResponseEntity hello() throws Exception {
-		return ResponseEntity.ok(msg);
+    @Value("${wms.service.health.msg: Packing Service - Config Server is not working..please check}")
+    private String healthMsg;
+    
+    @Value("${wms.service.ready.msg: Packing Service - Not ready yet}")
+    private String readyMsg;
+
+	@GetMapping("/ready")
+	public ResponseEntity ready() throws Exception {
+		return ResponseEntity.ok(readyMsg);
+	}
+	
+	@GetMapping("/health")
+	public ResponseEntity health() throws Exception {
+		return ResponseEntity.ok(healthMsg);
 	}
 	
 	@GetMapping("/{busName}/{locnNbr}/packs/{id}")
