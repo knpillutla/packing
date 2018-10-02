@@ -37,6 +37,9 @@ public class Pack  implements Serializable{
 	@Column(name="ORDER_LINE_ID")
 	Long orderLineId;
 
+	@Column(name="ORDER_NBR")
+	String orderNbr;
+
 	@Column(name="ORDER_LINE_NBR")
 	Integer orderLineNbr;
 
@@ -76,8 +79,8 @@ public class Pack  implements Serializable{
 	@Column(name="TO_CONTAINER_NBR")
 	String toContainer;
 
-	@Column(name="ORDER_NBR")
-	String orderNbr;
+	@Column(name="SINGLES")
+	String singles;
 
 	@Column(name="PACKAGE_NBR")
 	String packageNbr;
@@ -85,9 +88,6 @@ public class Pack  implements Serializable{
 	@Column(name="TRANSACTION_NAME")
 	String transName;
 	
-	@Column(name="SINGLES")
-	String singles;
-
 	@Column(name="SOURCE")
 	String source;
 
