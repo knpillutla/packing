@@ -1,4 +1,4 @@
-package com.example.packing.endpoint.listener;
+package com.threedsoft.packing.endpoint.listener;
 
 import java.time.LocalDateTime;
 
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
-import com.example.packing.dto.converter.PickConfirmToPackRequestConverter;
-import com.example.packing.service.PackingService;
-import com.example.packing.streams.PackingStreams;
-import com.example.picking.dto.events.PickConfirmationEvent;
+import com.threedsoft.packing.dto.converter.PickConfirmToPackRequestConverter;
+import com.threedsoft.packing.service.PackingService;
+import com.threedsoft.packing.streams.PackingStreams;
+import com.threedsoft.picking.dto.events.PickConfirmationEvent;
 
 import lombok.extern.slf4j.Slf4j;
 

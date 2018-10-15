@@ -1,13 +1,13 @@
-package com.example.packing.dto.converter;
+package com.threedsoft.packing.dto.converter;
 
-import com.example.packing.db.Pack;
-import com.example.packing.dto.requests.PackCreationRequestDTO;
-import com.example.packing.dto.responses.PackDTO;
+import com.threedsoft.packing.db.Pack;
+import com.threedsoft.packing.dto.requests.PackCreationRequestDTO;
+import com.threedsoft.packing.dto.responses.PackResourceDTO;
 
 public class EntityDTOConverter {
 
-	public static PackDTO getPackDTO(Pack packEntity) {
-		PackDTO packDTO = new PackDTO(packEntity.getId(), packEntity.getPickId(), packEntity.getOrderId(),
+	public static PackResourceDTO getPackDTO(Pack packEntity) {
+		PackResourceDTO packDTO = new PackResourceDTO(packEntity.getId(), packEntity.getPickId(), packEntity.getOrderId(),
 				packEntity.getOrderLineId(), packEntity.getOrderLineNbr(), packEntity.getBatchNbr(), 
 				packEntity.getBusName(), packEntity.getLocnNbr(),
 				packEntity.getBusUnit(), packEntity.getCompany(), packEntity.getDivision(), packEntity.getItemBrcd(),

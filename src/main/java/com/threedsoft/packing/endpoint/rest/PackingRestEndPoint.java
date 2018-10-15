@@ -1,4 +1,4 @@
-package com.example.packing.endpoint.rest;
+package com.threedsoft.packing.endpoint.rest;
 
 import java.io.IOException;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.packing.dto.requests.PackConfirmRequestDTO;
-import com.example.packing.service.PackingService;
+import com.threedsoft.packing.dto.requests.PackConfirmRequestDTO;
+import com.threedsoft.packing.service.PackingService;
 
 import io.swagger.annotations.Api;
 @Controller

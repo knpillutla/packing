@@ -1,15 +1,17 @@
-package com.example.packing.dto.converter;
+package com.threedsoft.packing.dto.converter;
 
 import org.springframework.stereotype.Component;
 
-import com.example.packing.dto.requests.PackCreationRequestDTO;
-import com.example.picking.dto.events.PickConfirmationEvent;
-import com.example.picking.dto.responses.PickDTO;
+import com.threedsoft.packing.dto.requests.PackCreationRequestDTO;
+import com.threedsoft.picking.dto.events.PickConfirmationEvent;
+import com.threedsoft.picking.dto.responses.PickResourceDTO;
+import com.threedsoft.util.dto.events.EventResourceConverter;
 
 @Component
 public class PickConfirmToPackRequestConverter {
 	public static PackCreationRequestDTO createPackCreationRequest(PickConfirmationEvent pickConfirmEvent) {
-		PickDTO pickDTO = pickConfirmEvent.getPickDTO();
+		PickResourceDTO pickDTO = (PickResourceDTO) EventResourceConverter
+				.getObject(pickConfirmEvent.getEventResource(), pickConfirmEvent.getEventResourceClassName());
 		PackCreationRequestDTO packReq = new PackCreationRequestDTO();
 		packReq.setPickId(pickDTO.getId());
 		packReq.setBatchNbr(pickDTO.getBatchNbr());

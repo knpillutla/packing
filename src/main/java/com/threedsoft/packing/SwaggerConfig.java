@@ -1,4 +1,4 @@
-package com.example.packing;
+package com.threedsoft.packing;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

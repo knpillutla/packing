@@ -1,4 +1,4 @@
-package com.example.packing;
+package com.threedsoft.packing;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import com.example.packing.streams.PackingStreams;
-import com.example.util.service.EventPublisher;
+import com.threedsoft.packing.streams.PackingStreams;
+import com.threedsoft.util.service.EventPublisher;
 
 import lombok.extern.slf4j.Slf4j;
 
