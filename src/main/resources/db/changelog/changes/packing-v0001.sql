@@ -11,7 +11,7 @@ CREATE TABLE packs
     ITEM_BRCD character varying(25),
     QTY integer NOT NULL DEFAULT 0,
     PACKED_QTY integer DEFAULT 0,
-    STAT_CODE integer DEFAULT 0,
+    STATUS character varying(25),
     FROM_CONTAINER_NBR  character varying(25),
     TO_CONTAINER_NBR  character varying(25),
     ORDER_ID   INTEGER,

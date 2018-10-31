@@ -70,8 +70,8 @@ public class Pack  implements Serializable{
 	@Column(name="PACKED_QTY")
 	Integer packedQty;
 
-	@Column(name="STAT_CODE")
-	Integer statCode;
+	@Column(name="STATUS")
+	String status;
 
 	@Column(name="FROM_CONTAINER_NBR")
 	String fromContainer;

@@ -11,7 +11,7 @@ public class EntityDTOConverter {
 				packEntity.getOrderLineId(), packEntity.getOrderLineNbr(), packEntity.getBatchNbr(), 
 				packEntity.getBusName(), packEntity.getLocnNbr(),
 				packEntity.getBusUnit(), packEntity.getCompany(), packEntity.getDivision(), packEntity.getItemBrcd(),
-				packEntity.getQty(), packEntity.getPackedQty(), packEntity.getStatCode(), packEntity.getFromContainer(),
+				packEntity.getQty(), packEntity.getPackedQty(), packEntity.getStatus(), packEntity.getFromContainer(),
 				packEntity.getToContainer(), packEntity.getOrderNbr(),
 				packEntity.getPackageNbr(),  packEntity.getTransName(),
 				packEntity.getSource(), packEntity.getHostName(), packEntity.getUserId());

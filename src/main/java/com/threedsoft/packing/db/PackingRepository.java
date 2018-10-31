@@ -2,6 +2,7 @@ package com.threedsoft.packing.db;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +24,7 @@ public interface PackingRepository extends JpaRepository<Pack, Long>{
 
 	@Query("select s from Pack s where s.busName=:busName and s.locnNbr=:locnNbr and s.id=:pickId")
 	public Pack findByPickId(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr, @Param("pickId") Long pickId);
+
+	@Query("select s from Pack s where s.busName=:busName and s.locnNbr=:locnNbr")
+	public List<Pack> findByBusNameAndLocnNbr(String busName, Integer locnNbr, Pageable pageRequest);
 }

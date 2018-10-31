@@ -19,5 +19,7 @@ public interface PackingService {
 	
 	public List<PackResourceDTO> findByContainerNbr(String busName, Integer locnNbr, String containerNbr) throws Exception;
 
-	PackResourceDTO findByPackId(String busName, Integer locnNbr, Long pickDtlId) throws Exception;
+	public PackResourceDTO findByPackId(String busName, Integer locnNbr, Long pickDtlId) throws Exception;
+
+	public List<PackResourceDTO> findByBusNameAndLocnNbr(String busName, Integer locnNbr) throws Exception;
 }

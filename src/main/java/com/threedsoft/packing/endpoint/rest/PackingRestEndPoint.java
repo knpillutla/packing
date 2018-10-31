@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.threedsoft.packing.dto.requests.PackConfirmRequestDTO;
 import com.threedsoft.packing.service.PackingService;
+import com.threedsoft.util.dto.ErrorResourceDTO;
 
 import io.swagger.annotations.Api;
 @Controller
@@ -55,7 +56,18 @@ public class PackingRestEndPoint {
 			return ResponseEntity.badRequest().body(new ErrorRestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error occured while getting next pick task"));
 		}
 	}
-
+	@GetMapping("/{busName}/{locnNbr}/packs")
+	public ResponseEntity getPicks(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr)
+			throws IOException {
+		try {
+			return ResponseEntity.ok(packingService.findByBusNameAndLocnNbr(busName, locnNbr));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					"Error occured while getting picks for busName:" + busName + ",locnNbr:" + locnNbr));
+		}
+	}
 	@GetMapping("/{busName}/{locnNbr}/packs/order/{id}")
 	public ResponseEntity getPacksByOrderId(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr, @PathVariable("id") Long orderId) throws IOException {
 		try {

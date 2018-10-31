@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.threedsoft.packing.db.Pack;
@@ -19,6 +20,7 @@ import com.threedsoft.packing.dto.events.PackCreatedEvent;
 import com.threedsoft.packing.dto.requests.PackConfirmRequestDTO;
 import com.threedsoft.packing.dto.requests.PackCreationRequestDTO;
 import com.threedsoft.packing.dto.responses.PackResourceDTO;
+import com.threedsoft.packing.util.PackStatus;
 import com.threedsoft.packing.util.PackingConstants;
 import com.threedsoft.util.service.EventPublisher;
 
@@ -32,22 +34,6 @@ public class PackingServiceImpl implements PackingService {
 	@Autowired
 	EventPublisher eventPublisher;
 	
-	public enum PackStatus {
-		CREATED(100), RELEASED(110), PACKED(120), SHORTED(140), CANCELLED(199);
-		PackStatus(Integer statCode) {
-			this.statCode = statCode;
-		}
-
-		private Integer statCode;
-
-		public Integer getStatCode() {
-			return statCode;
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.example.demo.PickingService#confirmPick(com.example.AvroPickTask)
-	 */
 	@Override
 	@Transactional
 	public PackResourceDTO confirmPack(PackConfirmRequestDTO packConfirmRequest) throws Exception{
@@ -58,7 +44,7 @@ public class PackingServiceImpl implements PackingService {
 			Pack packEntity = packDtl.get();
 			packEntity.setPackedQty((packEntity.getPackedQty()==null?0:packEntity.getPackedQty()) + packConfirmRequest.getQtyPacked());
 			packEntity.setUserId(packConfirmRequest.getUserId());
-			packEntity.setStatCode(PackStatus.PACKED.getStatCode());
+			packEntity.setStatus(PackStatus.PACKED.getStatus());
 			Pack updatedPackObj = packDAO.save(packEntity);
 			packDTO = EntityDTOConverter.getPackDTO(updatedPackObj);
 			PackConfirmationEvent packConfirmEvent = new PackConfirmationEvent(packDTO, PackingConstants.PACKING_SERVICE_NAME);
@@ -75,7 +61,7 @@ public class PackingServiceImpl implements PackingService {
 	@Transactional
 	public PackResourceDTO createPack(PackCreationRequestDTO packCreationReq) throws Exception {
 		Pack newPackEntity = EntityDTOConverter.getPackEntity(packCreationReq);
-		newPackEntity.setStatCode(PackStatus.RELEASED.getStatCode());
+		newPackEntity.setStatus(PackStatus.RELEASED.getStatus());
 		PackResourceDTO packDTO = EntityDTOConverter.getPackDTO(packDAO.save(newPackEntity));
 		PackCreatedEvent packCreatedEvent = new PackCreatedEvent(packDTO, PackingConstants.PACKING_SERVICE_NAME);
 		eventPublisher.publish(packCreatedEvent);
@@ -136,4 +122,17 @@ public class PackingServiceImpl implements PackingService {
 		}
 		return pickDTOList;
 	}
+
+	@Override
+	public List<PackResourceDTO> findByBusNameAndLocnNbr(String busName, Integer locnNbr)  throws Exception{
+		PageRequest pageRequest = new PageRequest(0, 20);
+		List<Pack> pickEntityList = packDAO.findByBusNameAndLocnNbr(busName, locnNbr, pageRequest);
+		List<PackResourceDTO> pickDTOList = new ArrayList();
+		if(pickEntityList!=null) {
+			for(Pack packEntity : pickEntityList) {
+				pickDTOList.add(EntityDTOConverter.getPackDTO(packEntity));
+			}
+		}
+		return pickDTOList;
+	}	
 }
