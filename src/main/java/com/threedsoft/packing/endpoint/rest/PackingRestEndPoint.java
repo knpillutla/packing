@@ -105,7 +105,7 @@ public class PackingRestEndPoint {
 		}
 	}	
 	
-	@PostMapping("/{busName}/{locnNbr}/inventory/search")
+	@PostMapping("/{busName}/{locnNbr}/packs/search")
 	public ResponseEntity searchInventory(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr,
 			@RequestBody PackSearchRequestDTO packSearchReq) throws IOException {
 		long startTime = System.currentTimeMillis();
