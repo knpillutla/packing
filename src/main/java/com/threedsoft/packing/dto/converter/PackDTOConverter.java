@@ -2,9 +2,10 @@ package com.threedsoft.packing.dto.converter;
 
 import com.threedsoft.packing.db.Pack;
 import com.threedsoft.packing.dto.requests.PackCreationRequestDTO;
+import com.threedsoft.packing.dto.requests.PackSearchRequestDTO;
 import com.threedsoft.packing.dto.responses.PackResourceDTO;
 
-public class EntityDTOConverter {
+public class PackDTOConverter {
 
 	public static PackResourceDTO getPackDTO(Pack packEntity) {
 		PackResourceDTO packDTO = new PackResourceDTO(packEntity.getId(), packEntity.getPickId(), packEntity.getOrderId(),
@@ -39,4 +40,20 @@ public class EntityDTOConverter {
 		return packEntity;
 	}
 
+	public static Pack getPackEntityForSeach(PackSearchRequestDTO packSearchReq) {
+		Pack packEntity = new Pack();
+		packEntity.setBatchNbr(packSearchReq.getBatchNbr());
+		packEntity.setBusName(packSearchReq.getBusName());
+		packEntity.setBusUnit(packSearchReq.getBusUnit());
+		packEntity.setCompany(packSearchReq.getCompany());
+		packEntity.setDivision(packSearchReq.getDivision());
+		packEntity.setFromContainer(packSearchReq.getFromContainer());
+		packEntity.setToContainer(packSearchReq.getToContainer());
+		packEntity.setItemBrcd(packSearchReq.getItemBrcd());
+		packEntity.setOrderId(packSearchReq.getOrderId());
+		packEntity.setOrderLineNbr(packSearchReq.getOrderLineNbr());
+		packEntity.setPickId(packSearchReq.getPickId());
+		packEntity.setLocnNbr(packSearchReq.getLocnNbr());
+		return packEntity;
+	}
 }

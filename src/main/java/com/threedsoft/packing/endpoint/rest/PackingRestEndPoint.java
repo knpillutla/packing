@@ -1,13 +1,13 @@
 package com.threedsoft.packing.endpoint.rest;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +17,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.threedsoft.packing.dto.requests.PackConfirmRequestDTO;
+import com.threedsoft.packing.dto.requests.PackSearchRequestDTO;
 import com.threedsoft.packing.service.PackingService;
 import com.threedsoft.util.dto.ErrorResourceDTO;
 
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/packing/v1")
 @Api(value="Pack Service", description="Operations pertaining to packing")
 @RefreshScope
+@Slf4j
 public class PackingRestEndPoint {
 
     @Autowired
@@ -101,4 +104,26 @@ public class PackingRestEndPoint {
 			return ResponseEntity.badRequest().body(new ErrorRestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error Occured for GET request busName:" + busName + ", id:" + id + " : " + e.getMessage()));
 		}
 	}	
+	
+	@PostMapping("/{busName}/{locnNbr}/inventory/search")
+	public ResponseEntity searchInventory(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr,
+			@RequestBody PackSearchRequestDTO packSearchReq) throws IOException {
+		long startTime = System.currentTimeMillis();
+		log.info("Received Pack search request for : " + packSearchReq.toString() + ": at :" + LocalDateTime.now());
+		ResponseEntity resEntity = null;
+		try {
+			resEntity = ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON)
+					.body(packingService.searchPacks(packSearchReq));
+		} catch (Exception e) {
+			e.printStackTrace();
+			resEntity = ResponseEntity.badRequest()
+					.body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+							"Error occured while searching for Packs:" + e.getMessage(), packSearchReq));
+		}
+		long endTime = System.currentTimeMillis();
+		log.info("Completed Pack search request for : " + packSearchReq.toString() + ": at :" + LocalDateTime.now()
+				+ " : total time:" + (endTime - startTime) / 1000.00 + " secs");
+		return resEntity;
+	}
+	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.threedsoft.packing.dto.requests.PackConfirmRequestDTO;
 import com.threedsoft.packing.dto.requests.PackCreationRequestDTO;
+import com.threedsoft.packing.dto.requests.PackSearchRequestDTO;
 import com.threedsoft.packing.dto.responses.PackResourceDTO;
 
 public interface PackingService {
@@ -22,4 +23,6 @@ public interface PackingService {
 	public PackResourceDTO findByPackId(String busName, Integer locnNbr, Long pickDtlId) throws Exception;
 
 	public List<PackResourceDTO> findByBusNameAndLocnNbr(String busName, Integer locnNbr) throws Exception;
+
+	public List<PackResourceDTO> searchPacks(PackSearchRequestDTO packSearchReq) throws Exception;
 }
