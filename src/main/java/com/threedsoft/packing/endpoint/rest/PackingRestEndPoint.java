@@ -39,16 +39,31 @@ public class PackingRestEndPoint {
     @Value("${wms.service.ready.msg: Packing Service - Not ready yet}")
     private String readyMsg;
 
+	@GetMapping("/")
+	public ResponseEntity healthBase() throws Exception {
+		return ResponseEntity.ok(readyMsg);
+	}
+
 	@GetMapping("/ready")
 	public ResponseEntity ready() throws Exception {
 		return ResponseEntity.ok(readyMsg);
 	}
 	
+	@GetMapping("/ready/")
+	public ResponseEntity readyPath() throws Exception {
+		return ResponseEntity.ok(readyMsg);
+	}
+
 	@GetMapping("/health")
 	public ResponseEntity health() throws Exception {
 		return ResponseEntity.ok(healthMsg);
 	}
 	
+	@GetMapping("/health/")
+	public ResponseEntity healthMap() throws Exception {
+		return ResponseEntity.ok(healthMsg);
+	}
+
 	@GetMapping("/{busName}/{locnNbr}/packs/{id}")
 	public ResponseEntity getByPackId(@PathVariable("busName") String busName, @PathVariable("locnNbr") Integer locnNbr, @PathVariable("id") Long packId) throws IOException {
 		try {

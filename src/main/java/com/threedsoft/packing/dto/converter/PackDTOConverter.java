@@ -1,10 +1,13 @@
 package com.threedsoft.packing.dto.converter;
 
+import org.springframework.stereotype.Component;
+
 import com.threedsoft.packing.db.Pack;
 import com.threedsoft.packing.dto.requests.PackCreationRequestDTO;
 import com.threedsoft.packing.dto.requests.PackSearchRequestDTO;
 import com.threedsoft.packing.dto.responses.PackResourceDTO;
 
+@Component
 public class PackDTOConverter {
 
 	public static PackResourceDTO getPackDTO(Pack packEntity) {
